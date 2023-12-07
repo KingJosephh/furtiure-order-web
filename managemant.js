@@ -20,14 +20,10 @@ axios.get('https://livejs-api.hexschool.io/api/livejs/v1/admin/joseph-aa-api/ord
 })
 
 let sellProduct = {
-    'Antony 遮光窗簾': 0,
-    'Charles 雙人床架': 0,
-    'Antony 雙人床架／雙人加大': 0,
-    'Louvre 雙人床架／雙人加大': 0,
-    'Jordan 雙人床架／雙人加大': 0,
-    'Antony 床邊桌': 0,
-    'Louvre 單人床架': 0,
-    'Charles 系列儲物組合': 0
+    '收納': 0,
+    '床架': 0,
+    '窗簾': 0,
+    '其他': 0,
 }
 // let sellProduct = {}
 console.log(sellProduct)
@@ -38,10 +34,10 @@ const showList = (aa) => {
         for(let i = 0; i < elm.products.length; i++){
             productStr += `<p>${elm.products[i].title}</p>`;
             let productsType = elm.products[i]
-            if(sellProduct[productsType.title] === 0){
-                sellProduct[productsType.title] = 1
+            if(sellProduct[productsType.category] === 0){
+                sellProduct[productsType.category] = 1
             }else{
-                sellProduct[productsType.title] += 1
+                sellProduct[productsType.category] += 1
             }
         }
         str += `<tr>
@@ -89,17 +85,13 @@ const toC3 = (aa) => {
     let chart = c3.generate({
         bindto: '#chart', // HTML 元素绑定
         data: {
-            type: "donut",
+            type: "pie",
             columns: aa,
             colors:{
-                "Antony 遮光窗簾": "#DACBFF",
-                "Charles 雙人床架": "#9D7FEA",
-                "Antony 雙人床架／雙人加大": "#5434A7",
-                "Louvre 雙人床架／雙人加大": "#63c522",
-                "Jordan 雙人床架／雙人加大": "#d12293",
-                "Antony 床邊桌": "#438dcb",
-                "Louvre 單人床架": "#ff7803",
-                "Charles 系列儲物組合": "#cb45cc",
+                '收納': "#DACBFF",
+                '床架': "#9D7FEA",
+                '窗簾': "#5434A7",
+                '其他': "#63c522",
             },
             onclick: function (d, i) { console.log("onclick", d, i); },
             onmouseover: function (d, i) { console.log("onmouseover", d, i); },
